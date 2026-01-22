@@ -1,14 +1,14 @@
 import { IUser } from "./user";
 
 export interface IGetRestaurantsParams {
-  location: string;
-  range: number;
-  priceMin: number;
-  priceMax: number;
-  rating: number;
-  category: string;
+  location?: string;
+  range?: number;
+  priceMin?: number;
+  priceMax?: number;
+  rating?: number;
+  category?: string;
   page: number;
-  limit: number;
+  limit?: number;
 }
 
 export interface IRestaurant {

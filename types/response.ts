@@ -12,7 +12,7 @@ export interface IErrorResponse extends IResponse {
 }
 
 export interface ISuccessPaginationResponse<T> {
-  data: T & Pagination;
+  data: T & { pagination: Pagination };
 }
 
 interface Pagination {
