@@ -11,6 +11,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import Logo from "./logo";
+import { cn } from "@/lib/utils";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,12 +24,48 @@ export default function Navbar() {
         </div>
 
         <div className="flex items-center gap-4 sm:gap-4.5 md:gap-5 lg:gap-5.5 xl:gap-6">
-          <button className="relative p-2 hover:bg-white/10 rounded-lg">
+          <button className="relative p-2 hover:bg-white/10 rounded-lg hidden">
             <ShoppingBag className="text-white" />
             <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
               3
             </span>
           </button>
+          <div className="sm:flex gap-4 hidden items-center">
+            <Button
+              variant="outline"
+              className={cn(
+                "lg:w-40.75 lg:h-12 md:w-36.75 md:h-10 sm:w-28.75 sm:h-8",
+                "rounded-full",
+                "border-2 border-neutral-300",
+                "gap-2",
+                "p-2",
+                "bg-transparent",
+                "hover:bg-neutral-50",
+                "text-base-white",
+                "text-base",
+                "leading-7.5",
+                "tracking-tight",
+              )}
+            >
+              Sign In
+            </Button>
+            <Button
+              className={cn(
+                "w-40.75 h-12 lg:w-40.75 lg:h-12 md:w-36.75 md:h-10 sm:w-28.75 sm:h-8",
+                "rounded-full",
+                "bg-white text-black",
+                "gap-2",
+                "p-2",
+                "hover:bg-gray-50",
+                "border-none",
+                "text-base",
+                "leading-7.5",
+                "tracking-tight",
+              )}
+            >
+              Sign Up
+            </Button>
+          </div>
 
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
@@ -42,17 +79,16 @@ export default function Navbar() {
             </SheetTrigger>
             <SheetContent
               side="right"
-              className="bg-black/95 backdrop-blur-lg border-white/10"
+              className="bg-black/95 backdrop-blur-lg border-white/10 gap-8 flex flex-col sm:hidden"
             >
               <SheetHeader>
-                <SheetTitle className="text-white text-left">Menu</SheetTitle>
+                <SheetTitle className="text-white text-left">
+                  Account
+                </SheetTitle>
               </SheetHeader>
 
-              <div className="mt-8 gap-6">
-                <div className="gap-4">
-                  <h3 className="text-lg font-semibold text-white mb-4">
-                    Account
-                  </h3>
+              <div className="gap-6 flex justify-center">
+                <div className="gap-4 flex flex-col w-full px-4">
                   <Button
                     variant="outline"
                     className="w-full justify-start h-12 bg-transparent border-white/20 text-white hover:bg-white/10 hover:text-white"
