@@ -1,4 +1,5 @@
 import Hero from "@/components/container/hero";
+import Menus from "@/components/container/menus";
 import Navbar from "@/components/container/navbar";
 
 export default function Home() {
@@ -6,7 +7,7 @@ export default function Home() {
     <>
       <Navbar></Navbar>
       <Hero></Hero>
-      <div className="h-20 bg-green-800 text-white z-50">MANTAP</div>
+      <Menus></Menus>
     </>
   );
 }

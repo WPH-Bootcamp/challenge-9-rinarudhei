@@ -22,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${nunito.className} antialiased w-screen max-w-98.25 sm:max-w-192 md:max-w-256 lg:max-w-360 min-w-98.25 bg-base-black flex flex-col justify-center mx-auto items-center`}
+        className={`${nunito.className} antialiased w-screen max-w-98.25 sm:max-w-192 md:max-w-256 lg:max-w-360 min-w-98.25 bg-base-white flex flex-col justify-center mx-auto items-center`}
       >
         {children}
       </body>
