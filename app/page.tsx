@@ -1,13 +1,10 @@
 "use client";
 
+import Footer from "@/components/container/footer";
 import Hero from "@/components/container/hero";
 import HomeRestaurants from "@/components/container/home-restaurants";
 import Menus from "@/components/container/menus";
 import Navbar from "@/components/container/navbar";
-import RestoCard from "@/components/container/restaurant-card";
-import { Button } from "@/components/ui/button";
-import { Spinner } from "@/components/ui/spinner";
-import React from "react";
 
 export default function Home() {
   return (
@@ -16,6 +13,7 @@ export default function Home() {
       <Hero></Hero>
       <Menus></Menus>
       <HomeRestaurants></HomeRestaurants>
+      <Footer></Footer>
     </>
   );
 }

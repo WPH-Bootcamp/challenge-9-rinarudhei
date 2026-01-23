@@ -1,10 +1,11 @@
 type LogoProps = {
   isLogin: boolean;
+  isFooter?: boolean;
 };
 
-export default function Logo({ isLogin }: LogoProps) {
+export default function Logo({ isLogin, isFooter }: LogoProps) {
   return (
-    <div className="flex items-center sm:gap-3 md:gap-3.25 lg:gap-3.5 xl:gap-3.75">
+    <div className="flex items-center gap-3.5 lg:gap-3.75">
       <svg
         viewBox="0 0 40 40"
         fill="none"
@@ -39,7 +40,7 @@ export default function Logo({ isLogin }: LogoProps) {
         </defs>
       </svg>
       <span
-        className={`font-extrabold sm:text-displaysm sm:leading-displaysm lg:text-displaylg lg:leading-displaylg xl:text-displaymd xl:leading-displaymd hidden sm:inline-block  ${isLogin ? "text-neutral-950" : "text-neutral-25"}`}
+        className={`font-extrabold text-displaysm lg:text-displaymd lg:leading-displaymd ${!isFooter ? "hidden sm:inline-block" : "inline"} sm:inline-block  ${isLogin && !isFooter ? "text-neutral-950" : "text-neutral-25"}`}
       >
         Foody
       </span>

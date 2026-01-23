@@ -23,7 +23,7 @@ export default function RootLayout({
   appProps: AppProps;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="bg-black">
       <body
         className={`${nunito.className} antialiased w-screen max-w-98.25 sm:max-w-192 md:max-w-256 lg:max-w-360 min-w-98.25 bg-base-white flex flex-col justify-center mx-auto items-center h-full`}
       >
