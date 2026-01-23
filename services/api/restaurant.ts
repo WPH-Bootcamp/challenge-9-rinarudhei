@@ -7,12 +7,15 @@ export const getRecommendedRestaurants = async () => {
   return response.data;
 };
 
-export const getHomeRestaurants = async ({ page }: IGetRestaurantsParams) => {
+export const getHomeRestaurants = async ({
+  page,
+  limit,
+}: IGetRestaurantsParams) => {
   const response = await api.get("/api/resto", {
     params: {
       page,
+      limit,
     },
   });
-
   return response.data;
 };

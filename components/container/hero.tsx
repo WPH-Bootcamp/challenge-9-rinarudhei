@@ -26,6 +26,7 @@ export default function Hero() {
         fill
         alt="Burger Hero Image PNG"
         className="object-cover min-w-98.25 max-h-full"
+        loading="eager"
       />
     </div>
   );

@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import { Nunito } from "next/font/google";
 import "./globals.css";
+import { AppProps } from "next/app";
+import { TanstackProvider } from "@/components/provider/tanstack-provider";
 
 const nunito = Nunito({
   subsets: ["latin"],
-  display: "swap", // 'swap' ensures a fallback font is displayed while Nunito loads
-  variable: "--font-nunito", // Define a CSS variable name
+  display: "swap",
+  variable: "--font-nunito",
 });
 
 export const metadata: Metadata = {
@@ -18,13 +20,14 @@ export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
+  appProps: AppProps;
 }>) {
   return (
     <html lang="en">
       <body
-        className={`${nunito.className} antialiased w-screen max-w-98.25 sm:max-w-192 md:max-w-256 lg:max-w-360 min-w-98.25 bg-base-white flex flex-col justify-center mx-auto items-center`}
+        className={`${nunito.className} antialiased w-screen max-w-98.25 sm:max-w-192 md:max-w-256 lg:max-w-360 min-w-98.25 bg-base-white flex flex-col justify-center mx-auto items-center h-full`}
       >
-        {children}
+        <TanstackProvider>{children}</TanstackProvider>
       </body>
     </html>
   );

@@ -25,7 +25,10 @@ export const useGetRecommendedRestaurants = () => {
 };
 
 export const useGetInfiniteRestaurants = (params: IGetRestaurantsParams) => {
-  return useInfiniteQuery<ISuccessPaginationResponse<IRestaurant>, AxiosError>({
+  return useInfiniteQuery<
+    ISuccessPaginationResponse<{ restaurants: IRestaurant[] }>,
+    AxiosError
+  >({
     initialPageParam: 1,
     queryKey: ["infinity-restaurant", params],
     queryFn: ({ pageParam }) =>
