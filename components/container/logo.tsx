@@ -1,16 +1,17 @@
 type LogoProps = {
   isLogin: boolean;
   isFooter?: boolean;
+  isRegister?: boolean;
 };
 
-export default function Logo({ isLogin, isFooter }: LogoProps) {
+export default function Logo({ isLogin, isFooter, isRegister }: LogoProps) {
   return (
     <div className="flex items-center gap-3.5 lg:gap-3.75">
       <svg
         viewBox="0 0 40 40"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className={`w-10 h-10 xl:w-10.5 xl:h-10.5 ${isLogin ? "text-primary-100" : "text-white"}`}
+        className={`w-10 h-10 xl:w-10.5 xl:h-10.5 ${isLogin || isRegister ? "text-primary-100" : "text-white"}`}
       >
         <g clipPath="url(#clip0_43981_6264)">
           <mask
@@ -40,7 +41,7 @@ export default function Logo({ isLogin, isFooter }: LogoProps) {
         </defs>
       </svg>
       <span
-        className={`font-extrabold text-displaysm lg:text-displaymd lg:leading-displaymd ${!isFooter ? "hidden sm:inline-block" : "inline"} sm:inline-block  ${isLogin && !isFooter ? "text-neutral-950" : "text-neutral-25"}`}
+        className={`font-extrabold text-displaysm lg:text-displaymd lg:leading-displaymd ${isFooter || isRegister ? "inline" : "hidden sm:inline-block"} sm:inline-block  ${isLogin && !isFooter ? "text-neutral-950" : "text-neutral-25"}`}
       >
         Foody
       </span>

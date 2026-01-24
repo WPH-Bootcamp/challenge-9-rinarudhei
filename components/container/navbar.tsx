@@ -20,9 +20,9 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`fixed top-0 z-50 w-full backdrop-blur-sm max-w-160 sm:max-w-192  md:max-w-256 lg:max-w-360  min-w-99.5 ${isLogin ? "bg-base-white" : "bg-tranparent"}`}
+      className={`fixed top-0 z-50 w-full backdrop-blur-sm max-w-360  ${isLogin ? "bg-base-white" : "bg-tranparent"}`}
     >
-      <div className="container mx-auto px-4 h-16 flex items-center justify-between">
+      <div className="mx-auto px-4 h-16 flex items-center justify-between">
         <div className="flex items-center">
           <Logo isLogin={isLogin} />
         </div>
