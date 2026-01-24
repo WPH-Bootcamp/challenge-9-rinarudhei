@@ -1,6 +1,7 @@
 "use client";
 import LoginForm from "@/components/container/login-form";
 import Logo from "@/components/container/logo";
+import RegisterForm from "@/components/container/register-form";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
@@ -55,8 +56,11 @@ export default function Login() {
             >
               <LoginForm></LoginForm>
             </TabsContent>
-            <TabsContent value="b" className="text-sm text-muted-foreground">
-              Konten B
+            <TabsContent
+              value="signup"
+              className="text-sm text-muted-foreground"
+            >
+              <RegisterForm></RegisterForm>
             </TabsContent>
           </Tabs>
         </div>
