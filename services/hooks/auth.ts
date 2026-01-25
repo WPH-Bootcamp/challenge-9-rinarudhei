@@ -1,11 +1,18 @@
 import { useMutation } from "@tanstack/react-query";
-import { login } from "../api/auth";
-import { ILoginParam, ILoginResponse } from "@/types/auth";
-import { setToken } from "@/app/auth/authSlice";
-import { setCurrentUser } from "@/app/auth/userSlice";
+import { login, register } from "../api/auth";
+import {
+  ILoginParam,
+  ILoginResponse,
+  IRegisterParam,
+  IRegisterResponse,
+} from "@/types/auth";
+import { setToken, clearToken } from "@/app/auth/authSlice";
+import { setCurrentUser, clearCurrentUser } from "@/app/auth/userSlice";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { useAppDispatch } from "../stores/store";
+import { useDispatch } from "react-redux";
+import { useCallback } from "react";
 
 export const useLogin = () => {
   const dispatch = useAppDispatch();
@@ -30,4 +37,31 @@ export const useLogin = () => {
       toast.error("Failed login user");
     },
   });
+};
+
+export const useRegister = () => {
+  const dispatch = useAppDispatch();
+  const router = useRouter();
+  return useMutation({
+    mutationFn: (body: IRegisterParam) => register(body),
+    onSuccess: (data: IRegisterResponse) => {
+      dispatch(setToken(data.token));
+      dispatch(setCurrentUser(data.user));
+      router.push("/");
+    },
+    onError: (e) => {
+      toast.error(`Failed register user: ${e.message}`);
+    },
+  });
+};
+
+export const useLogout = () => {
+  const dispatch = useAppDispatch();
+  const router = useRouter();
+  const logout = useCallback(() => {
+    dispatch(clearCurrentUser());
+    dispatch(clearToken());
+    router.push("/auth");
+  }, []);
+  return { logout };
 };

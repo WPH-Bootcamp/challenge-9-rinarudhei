@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Menu, ShoppingBag } from "lucide-react";
+import { FileText, LogOut, MapPin, Menu, ShoppingBag } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -15,12 +15,20 @@ import { cn, generateAvatarFallback } from "@/lib/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
 import { useAppSelector } from "@/services/stores/store";
 import Link from "next/link";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@radix-ui/react-popover";
+import { Separator } from "../ui/separator";
+import { useLogout } from "@/services/hooks/auth";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
   const { token } = useAppSelector((state) => state.auth);
   const { name, avatar } = useAppSelector((state) => state.user);
+  const { logout } = useLogout();
 
   useEffect(() => {
     if (token) {
@@ -28,9 +36,13 @@ export default function Navbar() {
     }
   }, [token]);
 
+  const handleLogout = () => {
+    logout();
+  };
+
   return (
     <nav
-      className={`fixed top-0 z-50 w-full backdrop-blur-sm max-w-360  ${isLogin ? "bg-base-white" : "bg-transparent"}`}
+      className={`fixed top-0 z-50 w-full backdrop-blur-sm max-w-360  ${isLogin ? "bg-transparent sm:bg-base-white" : "bg-transparent"}`}
     >
       <div className="mx-auto px-4 h-16 flex items-center justify-between">
         <div className="flex items-center">
@@ -40,7 +52,9 @@ export default function Navbar() {
         <div className="flex items-center gap-4 sm:gap-4.5 md:gap-5 lg:gap-5.5 xl:gap-6">
           {isLogin && (
             <button className="relative p-2 hover:bg-white/10 rounded-lg">
-              <ShoppingBag className={isLogin ? "text-black" : "text-white"} />
+              <ShoppingBag
+                className={isLogin ? "text-white sm:text-black" : "text-white"}
+              />
               <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
                 3
               </span>
@@ -88,23 +102,65 @@ export default function Navbar() {
             </div>
           )}
           {isLogin && (
-            <div className="sm:flex gap-4 hidden items-center">
-              <Avatar>
-                <AvatarImage
-                  src={avatar}
-                  alt="user avatar"
-                  className="rounded-full w-10 h-10 lg:w-12 lg:h-12"
-                />
-                <AvatarFallback>
-                  <div className="rounded-full w-10 h-10 lg:w-12 lg:h-12 flex justify-center items-center border-2 border-neutral-500 text-lg md:text-xl text-2xl text-neutral-500 bg-neutral-100">
-                    {generateAvatarFallback(name)}
+            <Popover>
+              <PopoverTrigger>
+                <div className="flex gap-4 items-center">
+                  <Avatar className={isLogin ? "inline" : "hidden"}>
+                    <AvatarImage
+                      src={avatar}
+                      alt="user avatar"
+                      className="rounded-full w-10 h-10 lg:w-12 lg:h-12"
+                    />
+                    <AvatarFallback>
+                      <div className="rounded-full w-10 h-10 lg:w-12 lg:h-12 flex justify-center items-center border-2 border-neutral-500 text-lg md:text-xl lg:text-2xl text-neutral-500 bg-neutral-100">
+                        {generateAvatarFallback(name)}
+                      </div>
+                    </AvatarFallback>
+                  </Avatar>
+                  <p className="hidden sm:inline text-neutral-950 text-lg leading-8">
+                    {name}
+                  </p>
+                </div>
+              </PopoverTrigger>
+              <PopoverContent className="border-none mt-2 mr-3.5">
+                <div className="flex flex-col w-49.25 rounded-2xl p-4 gap-3 bg-white">
+                  <div className="flex gap-4 items-center">
+                    <Avatar>
+                      <AvatarImage
+                        src={avatar}
+                        alt="user avatar"
+                        className="rounded-full w-9 h-9 lg:w-10 lg:h-10"
+                      />
+                      <AvatarFallback>
+                        <div className="rounded-full w-9 h-9 lg:w-10 lg:h-10 flex justify-center items-center border-2 border-neutral-500 text-lg text-neutral-500 bg-neutral-100">
+                          {generateAvatarFallback(name)}
+                        </div>
+                      </AvatarFallback>
+                    </Avatar>
+                    <p className="text-neutral-950 text-base leading-7.5">
+                      {name}
+                    </p>
                   </div>
-                </AvatarFallback>
-              </Avatar>
-              <p className="hidden sm:inline text-neutral-950 text-lg leading-8">
-                Rinaldi Adrian
-              </p>
-            </div>
+                  <Separator />
+                  <div className="flex gap-2">
+                    <MapPin></MapPin>
+                    <p className="text-neutral-950 text-sm leading-7">
+                      Delivery Address
+                    </p>
+                  </div>
+                  <div className="flex gap-2">
+                    <FileText></FileText>
+                    <p className="text-neutral-950 text-sm leading-7">
+                      My Orders
+                    </p>
+                  </div>
+                  <div className="flex gap-2" onClick={handleLogout}>
+                    <LogOut></LogOut>
+                    <p className="text-neutral-950 text-sm leading-7">Logout</p>
+                  </div>
+                </div>
+              </PopoverContent>
+            </Popover>
           )}
           {!isLogin && (
             <Sheet open={isOpen} onOpenChange={setIsOpen}>

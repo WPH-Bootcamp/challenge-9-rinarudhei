@@ -23,3 +23,8 @@ export interface ILoginResponse {
   user: IUser;
   token: string;
 }
+
+export interface IRegisterResponse {
+  user: IUser & { latitude: number; longitude: number };
+  token: string;
+}

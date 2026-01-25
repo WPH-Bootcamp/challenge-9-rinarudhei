@@ -18,7 +18,7 @@ export default function Menu({ imagePath, category }: MenuProps) {
           className="w-12 h-12 lg:w-16 lg:h-16 xl:w-16.25 xl:h-16.25"
         />
       </Card>
-      
+
       <p className="font-bold text-sm xl:text-lg leading-7 xl:leading-8 tracking-tight text-center text-neutral-950">
         {category}
       </p>

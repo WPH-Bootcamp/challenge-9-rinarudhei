@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { ClientProvider } from "@/components/provider/clientProvider";
 import HtmlWrapper from "@/components/provider/htmlWrapper";
+import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
   title: "Foody Buns App",
@@ -16,7 +17,10 @@ export default function RootLayout({
 }>) {
   return (
     <HtmlWrapper>
-      <ClientProvider>{children}</ClientProvider>
+      <ClientProvider>
+        {children}
+        <Toaster />
+      </ClientProvider>
     </HtmlWrapper>
   );
 }

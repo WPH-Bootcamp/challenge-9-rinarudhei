@@ -1,13 +1,15 @@
 import { IUser } from "@/types/user";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-const initialState: IUser = {
+const initialState: IUser & { latitude: number; longitude: number } = {
   id: 0,
   name: "",
   avatar: "",
   phone: "",
   createdAt: "",
   email: "",
+  latitude: 0,
+  longitude: 0,
 };
 
 const authSlice = createSlice({
@@ -29,6 +31,8 @@ const authSlice = createSlice({
       state.phone = initialState.phone;
       state.createdAt = initialState.createdAt;
       state.email = initialState.email;
+      state.longitude = initialState.longitude;
+      state.latitude = initialState.latitude;
     },
   },
 });

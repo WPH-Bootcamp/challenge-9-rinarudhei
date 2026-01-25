@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FieldGroup, Field } from "../ui/field";
 import { Label } from "@radix-ui/react-label";
 import { Input } from "../ui/input";
@@ -6,12 +6,22 @@ import { Eye, EyeOff } from "lucide-react";
 import { Checkbox } from "../ui/checkbox";
 import { Button } from "../ui/button";
 import { useLogin } from "@/services/hooks/auth";
+import { useAppSelector } from "@/services/stores/store";
+import { useRouter } from "next/navigation";
 
 export default function LoginForm() {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [showPassword, setShowPassword] = React.useState(false);
   const { mutate, isPending } = useLogin();
+  const token = useAppSelector((state) => state.auth.token);
+
+  const router = useRouter();
+  useEffect(() => {
+    if (token) {
+      router.push("/");
+    }
+  }, [token]);
   const handleEyeToggle = () => {
     setShowPassword((prev) => !prev);
   };

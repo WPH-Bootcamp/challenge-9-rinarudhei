@@ -10,7 +10,7 @@ export default function Menus() {
     { path: "/menu_lunch.png", category: "Lunch" },
   ];
   return (
-    <div className="h-full w-full py-6 px-4 gap-5 md:gap-0 flex justify-between sm:w-125 md:w-full lg:w-250 xl:w-300 flex-wrap lg:mt-6">
+    <div className="h-full w-screen xs:w-100 py-6 px-4 gap-5 md:gap-0 flex justify-between sm:w-125 md:w-full lg:w-250 xl:w-300 flex-wrap lg:mt-6">
       {menus.map((menu, i) => {
         return (
           <Menu key={i} imagePath={menu.path} category={menu.category}></Menu>
