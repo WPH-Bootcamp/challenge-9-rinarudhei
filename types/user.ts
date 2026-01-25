@@ -1,9 +1,8 @@
 export interface IUser {
   id: number;
   name: string;
+  email: string;
   phone: string;
   avatar: string;
-  latitude: number;
-  longitude: number;
   createdAt: string;
 }

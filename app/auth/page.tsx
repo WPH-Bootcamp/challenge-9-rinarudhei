@@ -6,7 +6,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 
-export default function Login() {
+export default function Auth() {
   const params = useSearchParams();
   const formType = params.get("form");
   return (

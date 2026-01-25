@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Menu, ShoppingBag } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -11,16 +11,26 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import Logo from "./logo";
-import { cn } from "@/lib/utils";
+import { cn, generateAvatarFallback } from "@/lib/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
+import { useAppSelector } from "@/services/stores/store";
+import Link from "next/link";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
+  const { token } = useAppSelector((state) => state.auth);
+  const { name, avatar } = useAppSelector((state) => state.user);
+
+  useEffect(() => {
+    if (token) {
+      setIsLogin(true);
+    }
+  }, [token]);
 
   return (
     <nav
-      className={`fixed top-0 z-50 w-full backdrop-blur-sm max-w-360  ${isLogin ? "bg-base-white" : "bg-tranparent"}`}
+      className={`fixed top-0 z-50 w-full backdrop-blur-sm max-w-360  ${isLogin ? "bg-base-white" : "bg-transparent"}`}
     >
       <div className="mx-auto px-4 h-16 flex items-center justify-between">
         <div className="flex items-center">
@@ -39,6 +49,7 @@ export default function Navbar() {
           {!isLogin && (
             <div className="sm:flex gap-4 hidden items-center">
               <Button
+                asChild
                 variant="outline"
                 className={cn(
                   "lg:w-40.75 lg:h-12 md:w-36.75 md:h-10 sm:w-28.75 sm:h-8",
@@ -52,9 +63,10 @@ export default function Navbar() {
                   "text-base",
                   "leading-7.5",
                   "tracking-tight",
+                  "cursor-pointer",
                 )}
               >
-                Sign In
+                <Link href="/auth">Sign In</Link>
               </Button>
               <Button
                 className={cn(
@@ -68,9 +80,10 @@ export default function Navbar() {
                   "text-base",
                   "leading-7.5",
                   "tracking-tight",
+                  "cursor-pointer",
                 )}
               >
-                Sign Up
+                <Link href="/auth/?form=signup">Sign Up</Link>
               </Button>
             </div>
           )}
@@ -78,90 +91,94 @@ export default function Navbar() {
             <div className="sm:flex gap-4 hidden items-center">
               <Avatar>
                 <AvatarImage
-                  src="https://github.com/shadcn.png"
-                  alt="@shadcn"
+                  src={avatar}
+                  alt="user avatar"
                   className="rounded-full w-10 h-10 lg:w-12 lg:h-12"
                 />
-                <AvatarFallback>CN</AvatarFallback>
+                <AvatarFallback>
+                  <div className="rounded-full w-10 h-10 lg:w-12 lg:h-12 flex justify-center items-center border-2 border-neutral-500 text-lg md:text-xl text-2xl text-neutral-500 bg-neutral-100">
+                    {generateAvatarFallback(name)}
+                  </div>
+                </AvatarFallback>
               </Avatar>
               <p className="hidden sm:inline text-neutral-950 text-lg leading-8">
                 Rinaldi Adrian
               </p>
             </div>
           )}
-          <Sheet open={isOpen} onOpenChange={setIsOpen}>
-            <SheetTrigger asChild>
-              <Button
-                variant="ghost"
-                size="icon"
-                className="text-white hover:bg-white/10 hover:text-white sm:hidden"
+          {!isLogin && (
+            <Sheet open={isOpen} onOpenChange={setIsOpen}>
+              <SheetTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="text-white hover:bg-white/10 hover:text-white sm:hidden"
+                >
+                  <Menu className="h-6 w-6" />
+                </Button>
+              </SheetTrigger>
+              <SheetContent
+                side="right"
+                className="bg-black/95 backdrop-blur-lg border-white/10 gap-8 flex flex-col sm:hidden"
               >
-                <Menu className="h-6 w-6" />
-              </Button>
-            </SheetTrigger>
-            <SheetContent
-              side="right"
-              className="bg-black/95 backdrop-blur-lg border-white/10 gap-8 flex flex-col sm:hidden"
-            >
-              <SheetHeader>
-                <SheetTitle className="text-white text-left">
-                  Account
-                </SheetTitle>
-              </SheetHeader>
+                <SheetHeader>
+                  <SheetTitle className="text-white text-left">
+                    Account
+                  </SheetTitle>
+                </SheetHeader>
 
-              <div className="gap-6 flex justify-center">
-                <div className="gap-4 flex flex-col w-full px-4">
-                  <Button
-                    variant="outline"
-                    className="w-full justify-start h-12 bg-transparent border-white/20 text-white hover:bg-white/10 hover:text-white"
-                    onClick={() => {
-                      setIsOpen(false);
-                      console.log("Login clicked");
-                    }}
-                  >
-                    <svg
-                      className="mr-3 h-5 w-5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
+                <div className="gap-6 flex justify-center">
+                  <div className="gap-4 flex flex-col w-full px-4">
+                    <Button
+                      asChild
+                      variant="outline"
+                      className="w-full justify-start h-12 bg-transparent border-white/20 text-white hover:bg-white/10 hover:text-white"
                     >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"
-                      />
-                    </svg>
-                    Login
-                  </Button>
+                      <Link href="/auth">
+                        <svg
+                          className="mr-3 h-5 w-5"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"
+                          />
+                        </svg>
+                        Login
+                      </Link>
+                    </Button>
 
-                  <Button
-                    variant="default"
-                    className="w-full justify-start h-12 bg-white text-black hover:bg-gray-100"
-                    onClick={() => {
-                      setIsOpen(false);
-                      console.log("Signup clicked");
-                    }}
-                  >
-                    <svg
-                      className="mr-3 h-5 w-5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
+                    <Button
+                      asChild
+                      variant="default"
+                      className="w-full justify-start h-12 bg-white text-black hover:bg-gray-100"
                     >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"
-                      />
-                    </svg>
-                    Sign Up
-                  </Button>
+                      <Link href="/auth/?form=signup">
+                        <svg
+                          className="mr-3 h-5 w-5"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"
+                          />
+                        </svg>
+                        Sign Up
+                      </Link>
+                    </Button>
+                  </div>
                 </div>
-              </div>
-            </SheetContent>
-          </Sheet>
+              </SheetContent>
+            </Sheet>
+          )}
         </div>
       </div>
     </nav>

@@ -24,6 +24,7 @@ export default function Hero() {
       <Image
         src="/BurgerHero.png"
         fill
+        sizes="full"
         alt="Burger Hero Image PNG"
         className="object-cover max-h-full"
         loading="eager"

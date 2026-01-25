@@ -10,9 +10,7 @@ export const register = async (data: IRegisterParam) => {
 };
 
 export const login = async (data: ILoginParam) => {
-  const response = await api.post("/api/auth/login", {
-    data,
-  });
+  const response = await api.post("/api/auth/login", data);
 
-  return response.data;
+  return response.data.data;
 };

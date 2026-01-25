@@ -1,3 +1,5 @@
+import { IUser } from "./user";
+
 export interface IRegisterParam {
   name: string;
   email: string;
@@ -15,4 +17,9 @@ export interface IUpdateProfileParam {
   email: string;
   phone: string;
   avatar: string;
+}
+
+export interface ILoginResponse {
+  user: IUser;
+  token: string;
 }

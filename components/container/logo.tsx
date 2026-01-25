@@ -1,3 +1,6 @@
+"use client";
+import { useRouter } from "next/navigation";
+
 type LogoProps = {
   isLogin: boolean;
   isFooter?: boolean;
@@ -5,8 +8,12 @@ type LogoProps = {
 };
 
 export default function Logo({ isLogin, isFooter, isRegister }: LogoProps) {
+  const router = useRouter();
   return (
-    <div className="flex items-center gap-3.5 lg:gap-3.75">
+    <div
+      className="flex items-center gap-3.5 lg:gap-3.75"
+      onClick={() => router.push("/")}
+    >
       <svg
         viewBox="0 0 40 40"
         fill="none"

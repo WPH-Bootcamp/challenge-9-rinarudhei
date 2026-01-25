@@ -24,6 +24,7 @@ export default function RestoCard({
           src={imagePath}
           alt={`${restoName} logo`}
           fill
+          sizes="full"
           className="object-cover"
         />
       </div>

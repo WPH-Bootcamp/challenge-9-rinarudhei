@@ -5,19 +5,23 @@ import { Input } from "../ui/input";
 import { Eye, EyeOff } from "lucide-react";
 import { Checkbox } from "../ui/checkbox";
 import { Button } from "../ui/button";
+import { useLogin } from "@/services/hooks/auth";
 
 export default function LoginForm() {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [showPassword, setShowPassword] = React.useState(false);
+  const { mutate, isPending } = useLogin();
   const handleEyeToggle = () => {
     setShowPassword((prev) => !prev);
+  };
+  const handleSubmitLogin = () => {
+    mutate({ email, password });
   };
   return (
     <FieldGroup className="grid gap-4 lg:gap-5">
       <div className="grid gap-4 lg:gap-5">
         <Field>
-          {/* <Label htmlFor="user-email">Email</Label> */}
           <Input
             id="user-email"
             type="email"
@@ -29,7 +33,6 @@ export default function LoginForm() {
         </Field>
         <Field>
           <div className="relative">
-            {/* <Label htmlFor="user-passsword">Password</Label> */}
             <Input
               id="user-password"
               type={showPassword ? "text" : "password"}
@@ -61,9 +64,11 @@ export default function LoginForm() {
         </Label>
       </Field>
       <Button
+        disabled={isPending}
         type="submit"
         variant="default"
         className=" w-full h-12 lg:h-14 rounded-[100px] bg-primary-100"
+        onClick={handleSubmitLogin}
       >
         <span className="text-sm leading-7 lg:text-base lg:leading-7.5 text-neutral-25">
           Login
