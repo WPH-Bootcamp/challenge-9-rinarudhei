@@ -20,10 +20,10 @@ export function DetailPagination({ data }: DetailPaginationProps) {
         <PaginationItem>
           <div className="w-90.25 h-[260.63px] rounded-2xl relative">
             <Image
-              src={data?.menus[activeImageId - 1].image as string}
+              src={data?.images[activeImageId - 1] as string}
               alt="Food Image"
               fill
-              className="object-fit w-full h-full absolute"
+              className="object-fit w-full h-full absolute rounded-2xl"
             ></Image>
           </div>
 

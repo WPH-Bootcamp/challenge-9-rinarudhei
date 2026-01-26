@@ -1,7 +1,8 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { Star } from "lucide-react";
+import { Share, Share2, Star } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { Button } from "../ui/button";
 
 type RestoCardProps = {
   id: number;
@@ -10,6 +11,7 @@ type RestoCardProps = {
   star: string;
   place: string;
   distance: string;
+  useShareButton?: boolean;
 };
 
 export default function RestoCard({
@@ -19,6 +21,7 @@ export default function RestoCard({
   star,
   place,
   distance,
+  useShareButton,
 }: RestoCardProps) {
   const router = useRouter();
   const handleClick = () => {
@@ -38,7 +41,7 @@ export default function RestoCard({
           className="object-cover"
         />
       </div>
-      <CardContent className="flex flex-col p-0 gap-2">
+      <CardContent className="flex flex-col p-0 gap-2 w-full">
         <h4 className="font-bold text-lg text-neutral-900">{restoName}</h4>
         <div className="flex items-center gap-2">
           <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
@@ -50,6 +53,13 @@ export default function RestoCard({
           <span>{distance} km</span>
         </div>
       </CardContent>
+      {useShareButton && (
+        <div className=" h-24 flex justify-center items-center">
+          <Button className="border border-neutral-300 rounded-full w-11 h-11 flex justify-center items-center bg-white text-black">
+            <Share2 className="w-5 h-5"></Share2>
+          </Button>
+        </div>
+      )}
     </Card>
   );
 }

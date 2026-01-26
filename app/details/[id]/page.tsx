@@ -11,7 +11,7 @@ import { Separator } from "@/components/ui/separator";
 import { Spinner } from "@/components/ui/spinner";
 import { useGetDetailRestaurant } from "@/services/hooks/restaurants";
 import { useAppSelector } from "@/services/stores/store";
-import { Star } from "lucide-react";
+import { Share, Star } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -55,6 +55,7 @@ export default function Detail() {
                 imagePath={data.data.logo}
                 star={data.data.star.toFixed(1)}
                 place={data.data.place}
+                useShareButton={true}
               ></RestoCard>
               <Separator />
               <div className="flex flex-col mb-6 gap-4 h-fit w-full">
