@@ -5,6 +5,7 @@ import FoodCard from "@/components/container/foodCard";
 import Footer from "@/components/container/footer";
 import Navbar from "@/components/container/navbar";
 import RestoCard from "@/components/container/restaurant-card";
+import ReviewCard from "@/components/container/reviewCard";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Spinner } from "@/components/ui/spinner";
@@ -18,8 +19,8 @@ export default function Detail() {
   const { id } = useParams<{ id: string }>();
   const { data, isPending, isError } = useGetDetailRestaurant({
     id,
-    limitMenu: 8,
-    limitReview: 6,
+    limitMenu: 10,
+    limitReview: 10,
   });
   const token = useAppSelector((state) => state.auth.token);
   const [activeFilter, setActiveFilter] = useState(0);
@@ -101,9 +102,16 @@ export default function Detail() {
                   </p>
                 </div>
               </div>
-              {/* {data.data.reviews.map((r, i) => (
-                <ReviewCard key={i}></ReviewCard>
-              ))} */}
+              {data.data.reviews.map((r, i) => (
+                <ReviewCard
+                  key={i}
+                  comments={r.comment}
+                  star={r.star}
+                  name={r.user.name}
+                  avatar={r.user.avatar}
+                  createdAt={r.createdAt}
+                ></ReviewCard>
+              ))}
             </>
           )}
         </div>
