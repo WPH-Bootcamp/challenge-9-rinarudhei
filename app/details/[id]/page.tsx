@@ -1,4 +1,5 @@
 "use client";
+import DetailGrid from "@/components/container/detailGrid";
 import { DetailPagination } from "@/components/container/detailPagination";
 import ErrorMessage from "@/components/container/error-message";
 import FoodCard from "@/components/container/foodCard";
@@ -39,7 +40,7 @@ export default function Detail() {
       {isError ? (
         <ErrorMessage errorMessage="Error getting restaurant details"></ErrorMessage>
       ) : (
-        <div className="flex flex-col w-full h-fit pt-4 pb-10 px-4 gap-4 mt-16">
+        <div className="flex flex-col w-full h-fit pt-4 pb-10 px-4 gap-4 mt-16 max-w-300">
           {isError ? (
             <ErrorMessage errorMessage="Error loading data"></ErrorMessage>
           ) : isPending ? (
@@ -47,6 +48,7 @@ export default function Detail() {
           ) : (
             <>
               <DetailPagination data={data?.data}></DetailPagination>
+              <DetailGrid data={data?.data}></DetailGrid>
               <RestoCard
                 key={data.data.id}
                 id={data.data.id}
@@ -78,7 +80,7 @@ export default function Detail() {
                   ))}
                 </div>
               </div>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5">
                 {data.data.menus.map((m, i) => (
                   <FoodCard
                     key={i}
@@ -103,16 +105,18 @@ export default function Detail() {
                   </p>
                 </div>
               </div>
-              {data.data.reviews.map((r, i) => (
-                <ReviewCard
-                  key={i}
-                  comments={r.comment}
-                  star={r.star}
-                  name={r.user.name}
-                  avatar={r.user.avatar}
-                  createdAt={r.createdAt}
-                ></ReviewCard>
-              ))}
+              <div className="grid grid-cols gap-4 md:grid-cols-2">
+                {data.data.reviews.map((r, i) => (
+                  <ReviewCard
+                    key={i}
+                    comments={r.comment}
+                    star={r.star}
+                    name={r.user.name}
+                    avatar={r.user.avatar}
+                    createdAt={r.createdAt}
+                  ></ReviewCard>
+                ))}
+              </div>
             </>
           )}
         </div>

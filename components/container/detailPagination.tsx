@@ -15,7 +15,7 @@ export function DetailPagination({ data }: DetailPaginationProps) {
   const [activeImageId, setActiveImageId] = useState(1);
   const images = [{ id: 1 }, { id: 2 }, { id: 3 }];
   return (
-    <Pagination>
+    <Pagination className="md:hidden ">
       <PaginationContent className="flex flex-col gap-3">
         <PaginationItem>
           <div className="w-90.25 h-[260.63px] rounded-2xl relative">

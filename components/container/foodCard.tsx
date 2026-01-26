@@ -39,13 +39,13 @@ export default function FoodCard({
     dispatch(removeFood(id));
   };
   return (
-    <Card className="flex flex-col w-32 xs:w-43 h-full rounded-2xl bg-white shadow-sm p-0 gap-0 justify-between border border-white">
-      <div className="h-43 w-full rounded-t-2xl relative">
+    <Card className="flex flex-col w-32 md:w-full lg:max-w-56 xl:max-w-71.25 xs:w-43 h-full rounded-2xl bg-white shadow-sm p-0 gap-0 justify-between border border-white">
+      <div className="h-43 md:h-56 lg:h-71.25 w-full rounded-t-2xl relative">
         <Image
           src={imagePath}
           alt="Food Card picture"
           fill
-          className="object-contain max-w-full max-h-full absolute rounded-t-2xl"
+          className="object-fit max-w-full max-h-full absolute rounded-t-2xl"
         ></Image>
       </div>
       <div className="flex flex-col p-3 gap-4 w-full h-fit">

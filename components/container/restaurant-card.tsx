@@ -29,7 +29,7 @@ export default function RestoCard({
   };
   return (
     <Card
-      className="flex flex-row gap-4 p-4 w-full bg-white border-none shadow-lg cursor-pointer"
+      className={`flex flex-row gap-4 p-4 w-full bg-white border-none cursor-pointer ${!useShareButton && "shadow-lg"} ${useShareButton && "mx-auto shadow-none"}`}
       onClick={handleClick}
     >
       <div className="relative w-24 h-24 rounded-xl overflow-hidden shrink-0">

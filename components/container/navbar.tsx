@@ -45,9 +45,9 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`fixed top-0 z-50 w-full backdrop-blur-sm max-w-360  ${isLogin ? "bg-transparent sm:bg-base-white" : "bg-transparent"}`}
+      className={`fixed top-0 z-50 w-full backdrop-blur-sm ${isLogin ? "bg-transparent sm:bg-base-white" : "bg-transparent"}`}
     >
-      <div className="mx-auto px-4 h-16 flex items-center justify-between">
+      <div className="mx-auto px-4 h-16 flex items-center justify-between max-w-300">
         <div className="flex items-center">
           <Logo isLogin={isLogin} />
         </div>
