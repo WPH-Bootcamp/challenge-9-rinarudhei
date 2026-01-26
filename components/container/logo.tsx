@@ -1,5 +1,5 @@
 "use client";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 type LogoProps = {
   isLogin: boolean;
@@ -8,6 +8,7 @@ type LogoProps = {
 };
 
 export default function Logo({ isLogin, isFooter, isRegister }: LogoProps) {
+  const pathname = usePathname();
   const router = useRouter();
   return (
     <div

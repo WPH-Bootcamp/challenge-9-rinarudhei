@@ -4,7 +4,17 @@ import { twMerge } from "tailwind-merge";
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
+export function generateRupiahString(price: number): string {
+  if (isNaN(price) || price === null || !price) {
+    return "Rp.0";
+  }
 
+  const number = Number(price);
+
+  const formatted = number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+
+  return `Rp.${formatted}`;
+}
 export function generateAvatarFallback(name: string): string {
   if (!name) {
     return "XX";

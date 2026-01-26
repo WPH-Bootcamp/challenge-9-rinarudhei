@@ -25,19 +25,20 @@ export interface IRestaurant {
   distance: number;
 }
 
-export interface IRecommendedRestaurant
-  extends Omit<IRestaurant, "menuCount" | "priceRange"> {
+export interface IRecommendedRestaurant extends Omit<
+  IRestaurant,
+  "menuCount" | "priceRange"
+> {
   sampleMenus: Menu[];
   isFrequentlyOrdered: true;
   lat: number;
   long: number;
 }
 
-export interface IRestaurantDetails
-  extends Omit<
-    IRestaurant,
-    "menuCount" | "reviewCount" | "priceRange" | "distance"
-  > {
+export interface IRestaurantDetails extends Omit<
+  IRestaurant,
+  "menuCount" | "reviewCount" | "priceRange" | "distance"
+> {
   averageRating: number;
   coordinates: Coordinates;
   totalMenus: number;
@@ -70,4 +71,18 @@ export type Menu = {
   price: number;
   type: string;
   image: string;
+};
+
+export interface IGetRestaurantDetailParams {
+  limitMenu: number;
+  limitReview: number;
+  id: string;
+}
+
+export type FoodCartItem = {
+  id: number;
+  name: string;
+  price: number;
+  imagePath: string;
+  quantity: number;
 };

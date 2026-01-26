@@ -1,8 +1,10 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Star } from "lucide-react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 type RestoCardProps = {
+  id: number;
   imagePath: string;
   restoName: string;
   star: string;
@@ -11,14 +13,22 @@ type RestoCardProps = {
 };
 
 export default function RestoCard({
+  id,
   imagePath,
   restoName,
   star,
   place,
   distance,
 }: RestoCardProps) {
+  const router = useRouter();
+  const handleClick = () => {
+    router.push(`/details/${id}`);
+  };
   return (
-    <Card className="flex flex-row gap-4 p-4 w-full bg-white border-none shadow-lg">
+    <Card
+      className="flex flex-row gap-4 p-4 w-full bg-white border-none shadow-lg cursor-pointer"
+      onClick={handleClick}
+    >
       <div className="relative w-24 h-24 rounded-xl overflow-hidden shrink-0">
         <Image
           src={imagePath}

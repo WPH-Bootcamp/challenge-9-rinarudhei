@@ -16,10 +16,7 @@ export default function HtmlWrapper({ children }: HtmlWrapperProps) {
   const pathname = usePathname();
 
   return (
-    <html
-      lang="en"
-      className={pathname?.startsWith("/auth") ? "bg-white" : "bg-black"}
-    >
+    <html lang="en" className={pathname === "/" ? "bg-black" : "bg-white"}>
       <body
         className={`${nunito.className} antialiased w-screen max-w-360  bg-base-white flex flex-col justify-center mx-auto items-center h-full p-0 m-0 box-border`}
       >

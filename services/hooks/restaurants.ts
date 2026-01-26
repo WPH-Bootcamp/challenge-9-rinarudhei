@@ -1,8 +1,10 @@
 import { ISuccessPaginationResponse, ISuccessResponse } from "@/types/response";
 import {
+  IGetRestaurantDetailParams,
   IGetRestaurantsParams,
   IRecommendedRestaurant,
   IRestaurant,
+  IRestaurantDetails,
 } from "@/types/restaurant";
 import {
   keepPreviousData,
@@ -11,6 +13,7 @@ import {
 } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import {
+  getDetailRestaurant,
   getHomeRestaurants,
   getRecommendedRestaurants,
 } from "../api/restaurant";
@@ -19,6 +22,15 @@ export const useGetRecommendedRestaurants = () => {
   return useQuery<ISuccessResponse<IRecommendedRestaurant[]>, AxiosError>({
     queryKey: ["recommended-restaurants"],
     queryFn: () => getRecommendedRestaurants(),
+    staleTime: 10 * 60 * 1000,
+    placeholderData: keepPreviousData,
+  });
+};
+
+export const useGetDetailRestaurant = (params: IGetRestaurantDetailParams) => {
+  return useQuery<ISuccessResponse<IRestaurantDetails>, AxiosError>({
+    queryKey: ["detail-restaurant", params],
+    queryFn: () => getDetailRestaurant(params),
     staleTime: 10 * 60 * 1000,
     placeholderData: keepPreviousData,
   });

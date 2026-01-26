@@ -42,8 +42,9 @@ export default function HomeRestaurants() {
                 {page.data.restaurants.map((resto) => (
                   <RestoCard
                     key={resto.id}
+                    id={resto.id}
                     restoName={resto.name}
-                    distance={"0"}
+                    distance={resto?.distance?.toString(1) || "0"}
                     imagePath={resto.logo}
                     star={resto.star.toFixed(1)}
                     place={resto.place}

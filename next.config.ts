@@ -17,6 +17,12 @@ const nextConfig: NextConfig = {
         port: "",
         pathname: "/wp-content/uploads/2020/04/**",
       },
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+        port: "",
+        pathname: "/dvz5kmwqx/image/upload/v1765188376/**",
+      },
     ],
   },
 };

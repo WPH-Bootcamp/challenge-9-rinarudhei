@@ -5,7 +5,7 @@ import { IUser } from "./user";
 export interface IInsertReviewParames {
   transactionId: string;
   restaurantId: number;
-  start: number;
+  star: number;
   comment: string;
   menuIds: number[];
 }

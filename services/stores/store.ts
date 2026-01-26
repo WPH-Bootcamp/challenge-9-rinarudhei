@@ -2,12 +2,14 @@ import { configureStore } from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
 import logger from "redux-logger";
 import allReducers from "./allReducers";
-import storage from "redux-persist/lib/storage";
 import { persistReducer } from "redux-persist";
+import createWebStorage from "redux-persist/lib/storage/createWebStorage";
 
+const storage = createWebStorage("session");
 const persistConfig = {
   key: "root",
   version: 1,
+  timeout: 10000,
   storage,
 };
 

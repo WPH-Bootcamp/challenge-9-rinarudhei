@@ -22,6 +22,7 @@ import {
 } from "@radix-ui/react-popover";
 import { Separator } from "../ui/separator";
 import { useLogout } from "@/services/hooks/auth";
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -29,6 +30,8 @@ export default function Navbar() {
   const { token } = useAppSelector((state) => state.auth);
   const { name, avatar } = useAppSelector((state) => state.user);
   const { logout } = useLogout();
+  const pathname = usePathname();
+  const { items: foods } = useAppSelector((state) => state.food);
 
   useEffect(() => {
     if (token) {
@@ -53,11 +56,15 @@ export default function Navbar() {
           {isLogin && (
             <button className="relative p-2 hover:bg-white/10 rounded-lg">
               <ShoppingBag
-                className={isLogin ? "text-white sm:text-black" : "text-white"}
+                className={
+                  pathname === "/" ? "text-white sm:text-black" : "text-black"
+                }
               />
-              <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-                3
-              </span>
+              {foods && foods.length > 0 && (
+                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                  {foods.reduce((prev, f) => prev + f.quantity, 0)}
+                </span>
+              )}
             </button>
           )}
           {!isLogin && (

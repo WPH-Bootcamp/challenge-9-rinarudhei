@@ -1,4 +1,8 @@
-import { IGetRestaurantsParams } from "@/types/restaurant";
+import {
+  IGetRestaurantDetailParams,
+  IGetRestaurantsParams,
+  IRestaurantDetails,
+} from "@/types/restaurant";
 import { api } from "./base";
 
 export const getRecommendedRestaurants = async () => {
@@ -17,5 +21,20 @@ export const getHomeRestaurants = async ({
       limit,
     },
   });
+  return response.data;
+};
+
+export const getDetailRestaurant = async ({
+  limitMenu,
+  limitReview,
+  id,
+}: IGetRestaurantDetailParams) => {
+  const response = await api.get(`/api/resto/${id}`, {
+    params: {
+      limitMenu,
+      limitReview,
+    },
+  });
+
   return response.data;
 };

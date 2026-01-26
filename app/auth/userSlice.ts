@@ -12,7 +12,7 @@ const initialState: IUser & { latitude: number; longitude: number } = {
   longitude: 0,
 };
 
-const authSlice = createSlice({
+const userSlice = createSlice({
   name: "userSlice",
   initialState,
   reducers: {
@@ -37,5 +37,5 @@ const authSlice = createSlice({
   },
 });
 
-export const { setCurrentUser, clearCurrentUser } = authSlice.actions;
-export default authSlice.reducer;
+export const { setCurrentUser, clearCurrentUser } = userSlice.actions;
+export default userSlice.reducer;
